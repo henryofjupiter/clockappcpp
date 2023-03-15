@@ -2,6 +2,12 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=clion,c++
 
 ### C++ ###
+
+#added by Henry
+.idea/
+CMakeLists.txt
+##
+
 # Prerequisites
 *.d
 
