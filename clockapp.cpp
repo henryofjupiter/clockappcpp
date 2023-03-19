@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <vector>
+#include <array>
+#include <cstring>
 
 using namespace std;
 
@@ -28,7 +32,6 @@ string twoDigitString(unsigned int n) {
     return newString;
 }
 
-//remember to make commit before proceeding
 string formatTime24(unsigned int h, unsigned int m, unsigned int s) {
     string newString;
 
@@ -58,14 +61,34 @@ string formatTime12(unsigned int h, unsigned int m, unsigned int s) {
     return newString;
 }
 
+void printMenu(char* string [], unsigned int numStrings, unsigned char width) {
 
+    cout << nCharString(25, '*') << endl;
+
+    for (int i = 0; i < numStrings; ++i) {
+        cout << '*' << ' ' << i + 1 << ' ' << '-' << ' ' << string[i];
+        if (strlen(string[i]) == 14) {
+            cout << nCharString(4, ' ');
+        }
+        else {
+            cout << nCharString(6, ' ');
+        }
+        cout << '*' << endl;
+    }
+    cout << nCharString(25, '*') << endl;
+}
 
 int main() {
+    char stringWidth = ' ';
+    const unsigned int NUM_STRINGS = 4;
+    char* menuString[NUM_STRINGS] = {"Add One Hour", "Add One Minute", "Add One Second", "Exit Program"};
     const int n = 5;   //for testing
     const char c = '*'; //for testing
     int h, m, s;        //for testing
 
     int userInput;
+
+    printMenu(menuString, NUM_STRINGS, stringWidth);
 
     cin >> userInput;
     cout << nCharString(n, c) << endl;
