@@ -102,21 +102,110 @@ void displayClocks(unsigned int h, unsigned int m, unsigned int s) {
 
 }
 
+//gets hour from user
+int getHour() {
+    int userInput;
+    cout << "input hour" << endl;
+    cin >> userInput;
+    return userInput;
+}
+
+//gets minute from user
+int getOneMinute() {
+    int userInput;
+    cout << "Input Minute" << endl;
+    cin >> userInput;
+    return userInput;
+}
+
+//gets second from user
+int getSecond() {
+    int userInput;
+    cout << "Input Second" << endl;
+    cin >> userInput;
+    return userInput;
+}
+int setHour(int h) {
+    return h;
+}
+int setMinute(int m) {
+    return m;
+}
+int setSecond(int s) {
+    return s;
+}
+
+void addOneHour() {
+    int h = getHour();
+
+    if (h >= 0 && h <= 22) {
+        setHour(h + 1);
+    }
+    else if (h == 23) {
+        setHour(0);
+    }
+}
+
+void addOneMinute() {
+    int m = getOneMinute();
+
+    if (m >= 0 && m <= 58) {
+        setMinute(m + 1);
+    }
+    else if (m == 59) {
+        setMinute(0);
+        addOneHour();
+    }
+}
+
+void addOneSecond() {
+    int s = getSecond();
+
+    if (s >= 0 && s <= 58) {
+        setSecond(s + 1);
+
+    }
+    else if (s == 59) {
+        setSecond(0);
+        addOneMinute();
+    }
+}
+
+void mainMenu() {
+    int userInput;
+
+    while(true) {
+        cout << "Input Menu Choice" << endl;
+        cin >> userInput;
+        if (getMenuChoice(userInput) == 1) {
+            addOneHour();
+            continue;
+        }
+        else if (getMenuChoice(userInput) == 2) {
+            addOneMinute();
+            continue;
+        }
+        else if (getMenuChoice(userInput) == 3) {
+            addOneSecond();
+            continue;
+        }
+        else if (getMenuChoice(userInput) == 4) {
+            cout << "PROGRAM EXITED" << endl;
+            break;
+        }
+        else {
+            continue;
+        }
+    }
+}
+
 int main() {
     char stringWidth = ' ';
     const unsigned int NUM_STRINGS = 4;
     char* menuString[NUM_STRINGS] = {"Add One Hour", "Add One Minute", "Add One Second", "Exit Program"};
-    const int n = 5;   //for testing
-    const char c = '*'; //for testing
     int h, m, s;        //for testing
 
-    int userInput;
-
     printMenu(menuString, NUM_STRINGS, stringWidth);
-
-    cin >> userInput;
-
-    getMenuChoice(userInput);
-    cin >> h >> m >> s;
-    displayClocks(h, m, s);
+    mainMenu();
+   // displayClocks(setHour(), setMinute(), setSecond());
 }
