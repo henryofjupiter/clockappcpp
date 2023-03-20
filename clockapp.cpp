@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
-#include <vector>
 #include <array>
 #include <cstring>
 
@@ -61,13 +59,14 @@ string formatTime12(unsigned int h, unsigned int m, unsigned int s) {
     return newString;
 }
 
+//print menu to console
 void printMenu(char* string [], unsigned int numStrings, unsigned char width) {
-
+    //error detected in sense. unexpected type string
     cout << nCharString(25, '*') << endl;
 
     for (int i = 0; i < numStrings; ++i) {
         cout << '*' << ' ' << i + 1 << ' ' << '-' << ' ' << string[i];
-        if (strlen(string[i]) == 14) {
+        if (strlen(string[i]) == 14) {      //strlen() is a cstring function used to get length of index string[i]
             cout << nCharString(4, ' ');
         }
         else {
@@ -76,6 +75,31 @@ void printMenu(char* string [], unsigned int numStrings, unsigned char width) {
         cout << '*' << endl;
     }
     cout << nCharString(25, '*') << endl;
+}
+
+//gets menu choice to max choice input from user and check if in range
+unsigned int getMenuChoice(unsigned int maxChoice) {
+
+    for (int i = 0; i <= 9; ++i) {
+       if (maxChoice >= 1 && maxChoice <= 4) {
+           break;
+       }
+       else {
+           cin >> maxChoice;
+       }
+   }
+   return maxChoice;
+}
+
+void displayClocks(unsigned int h, unsigned int m, unsigned int s) {
+    cout << nCharString(27, '*') << nCharString(3, ' ') << nCharString(27, '*') << endl;
+    cout << nCharString(1, '*') << nCharString(6, ' ') << "12-HOUR CLOCK"<< nCharString(6, ' ') << nCharString(1, '*') << nCharString(3, ' ');
+    cout << nCharString(1, '*') << nCharString(6, ' ') << "24-HOUR CLOCK"<< nCharString(6, ' ') << nCharString(1, '*') << endl;
+    cout << endl;
+    cout << nCharString(1,'*') << nCharString(6, ' ') << formatTime12(h, m, s) << nCharString(7, ' ') << nCharString(1, '*') << nCharString(3, ' ');
+    cout << nCharString(1,'*') << nCharString(8, ' ') << formatTime24(h, m, s) << nCharString(9, ' ') << nCharString(1, '*')<< endl;
+    cout << nCharString(27, '*') << nCharString(3, ' ') << nCharString(27, '*') << endl;
+
 }
 
 int main() {
@@ -91,10 +115,8 @@ int main() {
     printMenu(menuString, NUM_STRINGS, stringWidth);
 
     cin >> userInput;
-    cout << nCharString(n, c) << endl;
-    cout << twoDigitString(userInput) << endl;
-    cin >> h >> m >> s;
-    cout << formatTime24(h, m, s) << endl;
-    cout << formatTime12(h, m, s) << endl;
 
+    getMenuChoice(userInput);
+    cin >> h >> m >> s;
+    displayClocks(h, m, s);
 }
