@@ -5,6 +5,10 @@
 
 using namespace std;
 
+//global variables
+int hour, minute, second;
+
+
 string nCharString(size_t n, char c) {
     string newString;
 
@@ -59,6 +63,7 @@ string formatTime12(unsigned int h, unsigned int m, unsigned int s) {
     return newString;
 }
 
+
 //print menu to console
 void printMenu(char* string [], unsigned int numStrings, unsigned char width) {
     //error detected in sense. unexpected type string
@@ -91,6 +96,7 @@ unsigned int getMenuChoice(unsigned int maxChoice) {
    return maxChoice;
 }
 
+//displays clock
 void displayClocks(unsigned int h, unsigned int m, unsigned int s) {
     cout << nCharString(27, '*') << nCharString(3, ' ') << nCharString(27, '*') << endl;
     cout << nCharString(1, '*') << nCharString(6, ' ') << "12-HOUR CLOCK"<< nCharString(6, ' ') << nCharString(1, '*') << nCharString(3, ' ');
@@ -125,52 +131,58 @@ int getSecond() {
     cin >> userInput;
     return userInput;
 }
+
 int setHour(int h) {
     return h;
 }
 int setMinute(int m) {
     return m;
 }
+
 int setSecond(int s) {
     return s;
 }
 
+//adds one hour
 void addOneHour() {
     int h = getHour();
 
     if (h >= 0 && h <= 22) {
-        setHour(h + 1);
+        hour = setHour(h + 1);
     }
     else if (h == 23) {
-        setHour(0);
+        hour = setHour(0);
     }
 }
 
+//adds one minute
 void addOneMinute() {
     int m = getOneMinute();
 
     if (m >= 0 && m <= 58) {
-        setMinute(m + 1);
+        minute = setMinute(m + 1);
     }
     else if (m == 59) {
-        setMinute(0);
+        minute = setMinute(0);
         addOneHour();
     }
 }
 
+//adds one second
 void addOneSecond() {
     int s = getSecond();
 
     if (s >= 0 && s <= 58) {
-        setSecond(s + 1);
+        second = setSecond(s + 1);
 
     }
     else if (s == 59) {
-        setSecond(0);
+        second = setSecond(0);
         addOneMinute();
     }
 }
 
+//manages input loop
 void mainMenu() {
     int userInput;
 
@@ -203,9 +215,10 @@ int main() {
     char stringWidth = ' ';
     const unsigned int NUM_STRINGS = 4;
     char* menuString[NUM_STRINGS] = {"Add One Hour", "Add One Minute", "Add One Second", "Exit Program"};
-    int h, m, s;        //for testing
 
     printMenu(menuString, NUM_STRINGS, stringWidth);
     mainMenu();
-   // displayClocks(setHour(), setMinute(), setSecond());
+
+   //global variables as parameters
+   displayClocks(hour, minute, second);
 }
