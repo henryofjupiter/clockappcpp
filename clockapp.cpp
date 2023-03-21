@@ -6,7 +6,7 @@
 using namespace std;
 
 //global variables
-int hour, minute, second;
+int HOUR, MINUTE, SECOND;
 
 
 string nCharString(size_t n, char c) {
@@ -148,10 +148,10 @@ void addOneHour() {
     int h = getHour();
 
     if (h >= 0 && h <= 22) {
-        hour = setHour(h + 1);
+        HOUR = setHour(h + 1);
     }
     else if (h == 23) {
-        hour = setHour(0);
+        HOUR = setHour(0);
     }
 }
 
@@ -160,10 +160,10 @@ void addOneMinute() {
     int m = getOneMinute();
 
     if (m >= 0 && m <= 58) {
-        minute = setMinute(m + 1);
+        MINUTE = setMinute(m + 1);
     }
     else if (m == 59) {
-        minute = setMinute(0);
+        MINUTE = setMinute(0);
         addOneHour();
     }
 }
@@ -173,11 +173,11 @@ void addOneSecond() {
     int s = getSecond();
 
     if (s >= 0 && s <= 58) {
-        second = setSecond(s + 1);
+        SECOND = setSecond(s + 1);
 
     }
     else if (s == 59) {
-        second = setSecond(0);
+        SECOND = setSecond(0);
         addOneMinute();
     }
 }
@@ -220,5 +220,5 @@ int main() {
     mainMenu();
 
    //global variables as parameters
-   displayClocks(hour, minute, second);
+   displayClocks(HOUR, MINUTE, SECOND);
 }
